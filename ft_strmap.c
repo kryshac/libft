@@ -6,7 +6,7 @@
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 21:03:25 by ccristia          #+#    #+#             */
-/*   Updated: 2017/11/30 15:25:04 by ccristia         ###   ########.fr       */
+/*   Updated: 2017/12/05 20:48:47 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,20 @@
 char	*ft_strmap(char const *s, char (*f)(char))
 {
 	char	*pnt;
-	size_t	i;
+	char	*ret;
 
 	if (s != NULL)
 	{
-		i = ft_strlen(s);
-		pnt = (char *)malloc(i + 1);
-		if (pnt != NULL)
+		pnt = ft_strdup(s);
+		if (pnt == NULL)
+			return (NULL);
+		ret = pnt;
+		while (*pnt)
 		{
-			pnt[i] = '\0';
-			while (i > 0)
-			{
-				pnt[i - 1] = f(s[i - 1]);
-				i--;
-			}
+			*pnt = f(*pnt);
+			pnt++;
 		}
-		return (pnt);
+		return (ret);
 	}
 	return (NULL);
 }

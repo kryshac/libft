@@ -6,59 +6,35 @@
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 22:10:53 by ccristia          #+#    #+#             */
-/*   Updated: 2017/11/30 15:20:40 by ccristia         ###   ########.fr       */
+/*   Updated: 2017/12/05 18:57:18 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_atoi_t(int nb, char c, char b)
+int	ft_atoi(const char *str)
 {
-	if ((nb == 0 && (c < 9 || c > 13) &&
-		c != 32 && c != 43 && c != 45) ||
-		(nb == 0 && (c == 43 || c == 48 || c == 45) &&
-		(b < 48 || b > 57)) ||
-		(nb != 0 && (c < 48 || c > 57)))
-		return (1);
-	else
-		return (-1);
-}
-
-static int		ft_atoi_max(int nb, int sem, char c)
-{
-	if ((2147483647 - nb) < (10 + c - 48) && sem == 1)
-		return (-1);
-	else if ((2147483647 - nb) < (10 + c - 48) && sem == -1)
-		return (0);
-	else
-		return (1);
-}
-
-int				ft_atoi(const char *nptr)
-{
-	int nb;
-	int i;
-	int sem;
+	char	*pnt;
+	int		nb;
+	int		sem;
 
 	nb = 0;
-	i = 0;
 	sem = 1;
-	while (nptr[i] != '\0')
+	pnt = (char *)str;
+	while (*pnt)
 	{
-		if (nb == 0 && nptr[i] == 45 && nptr[i + 1] >= 48 && nptr[i + 1] <= 57)
-			sem = -sem;
-		else if (nb == 0 && nptr[i] == 48 &&
-			(nptr[i + 1] < 48 || nptr[i + 1] > 57))
-			break ;
-		else if (nptr[i] >= 48 && nptr[i] <= 57)
+		if (*pnt >= '0' && *pnt <= '9')
 		{
-			if (ft_atoi_max(nb, sem, nptr[i]) != 1)
-				return (ft_atoi_max(nb, sem, nptr[i]));
-			nb = nb * 10 + nptr[i] - 48;
+			if ((2147483647 - nb) < (10 + *pnt - 48))
+				return ((sem != -1) * -1);
+			nb = nb * 10 + *pnt - '0';
 		}
-		else if (ft_atoi_t(nb, nptr[i], nptr[i + 1]) == 1)
-			break ;
-		i++;
+		else if (nb == 0 && (*pnt == '-' || *pnt == '+') &&
+			(*(pnt + 1) >= '0' && *(pnt + 1) <= '9'))
+			sem = ((*pnt == '-') * -1 + (*pnt == '+'));
+		else if (nb != 0 || (!(*pnt >= 8 && *pnt <= 13) && *pnt != 32))
+			return (nb * sem);
+		pnt++;
 	}
 	return (nb * sem);
 }
