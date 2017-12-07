@@ -6,7 +6,7 @@
 /*   By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 14:43:28 by ccristia          #+#    #+#             */
-/*   Updated: 2017/12/05 03:12:01 by ccristia         ###   ########.fr       */
+/*   Updated: 2017/12/07 13:32:20 by ccristia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *s, int c)
 
 	pnt = (char *)s;
 	ret = NULL;
-	while(*pnt)
+	while (*pnt)
 		if (*pnt++ == (char)c)
 			ret = pnt - 1;
 	if ((char)c == '\0')

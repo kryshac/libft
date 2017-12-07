@@ -6,7 +6,7 @@
 #    By: ccristia <ccristia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/03 14:27:11 by ccristia          #+#    #+#              #
-#    Updated: 2017/12/04 02:08:11 by ccristia         ###   ########.fr        #
+#    Updated: 2017/12/07 14:01:01 by ccristia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,3 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
-
-so:
-	$(CC) -g -fPIC $(CFLAGS) -pedantic $(SRCS) -shared -o libft.so
